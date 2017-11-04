@@ -68,6 +68,16 @@ namespace SingleResponsibilityPrinciple
                 return false;
             }
 
+            //check trade amounts
+            if(tradeAmount < 1000)
+            {
+                return false; //ignore
+            }
+            if(tradeAmount > 100000)
+            {
+                return false; //ignore
+            }
+
             decimal tradePrice;
             if (!decimal.TryParse(fields[2], out tradePrice))
             {
