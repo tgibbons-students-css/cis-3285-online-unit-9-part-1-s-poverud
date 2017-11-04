@@ -49,6 +49,7 @@ namespace SingleResponsibilityPrinciple
 
         private bool ValidateTradeData(string[] fields, int currentLine)
         {
+            //change method call to new logmessage parameters 
             if (fields.Length != 3)
             {
                 LogMessage("WARN", " Line {0} malformed. Only {1} field(s) found.", currentLine, fields.Length);
@@ -91,6 +92,11 @@ namespace SingleResponsibilityPrinciple
         private void LogMessage(string msgType, string message, params object[] args)
         {
             Console.WriteLine(msgType+ " :" +message, args);
+            //output to xml
+            using (StreamWriter logfile = File.AppendText("log.xml"))
+            {
+                logfile.WriteLine("<log><type>" + msgType + "</type><message>" + message + "</message></log> ", args);
+            }
         }
 
         private TradeRecord MapTradeDataToTradeRecord(string[] fields)
